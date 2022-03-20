@@ -22,7 +22,7 @@ public class Categoria implements Serializable {
 	private String nome;
 	
 	//2 - Associations
-	//Ignored: The Product Class not created yet;
+	//Initially ignored: The Product Class not created yet;
 	
 	public Categoria() {}
 	
