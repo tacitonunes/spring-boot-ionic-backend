@@ -1,5 +1,6 @@
 package com.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,11 @@ public class CategoriaService {
 	
 	@Autowired
 	private CategoriaRepository repo;
+	
+	public List<Categoria> listar() {
+		//List<Categoria> categorias = repo.findAll();
+		return repo.findAll();
+	}
 
 	public Categoria buscar(Integer id) {
 

@@ -1,7 +1,9 @@
 package com.cursomc.resources;
 
-import java.util.ArrayList;
 import java.util.List;
+
+/*import java.util.ArrayList;
+import java.util.List;*/
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,16 +23,11 @@ public class CategoriaResource {
 	private CategoriaService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Categoria> listar() {
-		
-		
-		Categoria cat1 = new Categoria(1, "Informática");
-		Categoria cat2 = new Categoria(2, "Escritório");
-		List<Categoria> categorias = new ArrayList<>();
-		categorias.add(cat1);
-		categorias.add(cat2);
-		
-		return categorias;
+	public ResponseEntity<?> listar() {
+
+		List<Categoria> obj = service.listar();
+		return ResponseEntity.ok().body(obj);
+
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
