@@ -2,12 +2,15 @@ package com.cursomc.domain;
 
 //5 - Implements Serializable
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Categoria implements Serializable {
@@ -20,10 +23,14 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+
+	@ManyToMany(mappedBy="categorias")
 	
 	//2 - Associations
-	//Initially ignored: The Product Class not created yet;
-	
+	//inicialmente ignorado: A classe Produto ainda não havia sido implementada;
+	// No vídeo 19 do curso, apenas, que começamos a implementação da entidade Produto e suas conseqüentes associações;
+	private List<Produto> produtos = new ArrayList<>();
+		
 	public Categoria() {}
 	
 	public Categoria (Integer id, String nome) {
@@ -48,7 +55,16 @@ public class Categoria implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+	
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+	
+	
 	// 4 - hashCode and equals
 	//sources >> Generate hashCode and equals
 	@Override
@@ -67,6 +83,7 @@ public class Categoria implements Serializable {
 		Categoria other = (Categoria) obj;
 		return Objects.equals(id, other.id);
 	}
+
 	
 	
 	
