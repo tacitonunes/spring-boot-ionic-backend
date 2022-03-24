@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Categoria implements Serializable {
 
@@ -24,6 +26,11 @@ public class Categoria implements Serializable {
 	private Integer id;
 	private String nome;
 
+	
+	/*Evitar Serialização Cíclica!!
+	 * O carinha abaixo fica no lado em quê você quer que sejam listados os outros objetos da outra classe
+	 */
+	@JsonManagedReference	
 	@ManyToMany(mappedBy="categorias")
 	
 	//2 - Associations

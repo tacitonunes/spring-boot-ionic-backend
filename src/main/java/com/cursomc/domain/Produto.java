@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 //4 - implementar o serializable
 
 
@@ -41,6 +43,10 @@ public class Produto implements Serializable {
 	 * 			
 	 */
 	
+	/*Evitar Serialização Cíclica!!
+	 * O carinha abaixo fica no lado em quê você não quer que sejam listados os outros objetos da outra classe
+	 */
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(
 			name = "PRODUTO_CATEGORIA", 
