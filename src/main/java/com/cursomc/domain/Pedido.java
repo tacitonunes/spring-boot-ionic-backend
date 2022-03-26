@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -27,6 +27,8 @@ public class Pedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
 	private Date instante;
 	
 	//UM PEDIDO SE RELACIONA COM UM PAGAMENTO - BIDIRECIONALMENTE
@@ -35,7 +37,7 @@ public class Pedido implements Serializable {
 	private Pagamento pagamento;
 	
 	//UM PEDIDO SE RELACIONA COM UM CLIENTE - BIDIRECIONALMENTE, MAS NÃO SERIALIZA O CLIENTE CICLICAMENTE
-	@JsonBackReference
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;

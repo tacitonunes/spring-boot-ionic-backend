@@ -6,6 +6,8 @@ import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ItemPedido implements Serializable { 
 	
@@ -13,6 +15,7 @@ public class ItemPedido implements Serializable {
 
 	//CLASSE DE ASSOCIAÇÃO ENTRE PRODUTO X PEDIDO
 	
+	@JsonIgnore //Não será serializado o pedido ou produto a partir do itempedido
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
 	
@@ -36,6 +39,7 @@ public class ItemPedido implements Serializable {
 		this.quantidade = quantidade;
 	}
 	
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
