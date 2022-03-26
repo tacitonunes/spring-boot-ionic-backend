@@ -16,8 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.cursomc.domain.enums.TipoCliente;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cliente implements Serializable{
@@ -33,7 +32,6 @@ public class Cliente implements Serializable{
 	private Integer tipo;
 	
 	//Aqui, libero a serialização de endereços pelo endpoint /clientes/{id}
-	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -47,7 +45,7 @@ public class Cliente implements Serializable{
 	private Set<String> telefones = new HashSet<>();
 	
 	//Aqui, libero a serialização de pedidos pelo endpoint /clientes/{id}
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
