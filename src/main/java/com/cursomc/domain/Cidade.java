@@ -24,6 +24,10 @@ public class Cidade implements Serializable{
 	@JoinColumn(name="estado_id") //Nome da chave estrangeira (estado) na tabela Cidades
 	private Estado estado;
 	
+	/*
+	 * OBS: A CIDADE NÃO PRECISA CONHECER A IMPLEMENTAÇÃO DO ESTADO. É IRRELEVANTE, POR ISSO NÃO HÁ MAPEAMENTO. 
+	 */
+	
 	public Cidade() {}
 
 	public Cidade(Integer id, String nome, Estado estado) {
