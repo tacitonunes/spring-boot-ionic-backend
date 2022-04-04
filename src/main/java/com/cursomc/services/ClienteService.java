@@ -16,12 +16,12 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repo;
 	
-	public List<Cliente> listar() {
+	public List<Cliente> listAll() {
 		//List<Cliente> categorias = repo.findAll();
 		return repo.findAll();
 	}
 
-	public Cliente buscar(Integer id) {
+	public Cliente findById(Integer id) {
 
 		/*
 		 * Cliente obj = repo.getById(id);

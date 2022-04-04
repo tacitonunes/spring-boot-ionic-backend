@@ -16,12 +16,12 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository repo;
 	
-	public List<Pedido> listar() {
+	public List<Pedido> listAll() {
 		//List<Pedido> categorias = repo.findAll();
 		return repo.findAll();
 	}
 
-	public Pedido buscar(Integer id) {
+	public Pedido findById(Integer id) {
 
 		/*
 		 * Pedido obj = repo.getById(id);

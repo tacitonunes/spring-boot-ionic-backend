@@ -25,15 +25,15 @@ public class ClienteResource {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> listar() {
 
-		List<Cliente> obj = service.listar();
+		List<Cliente> obj = service.listAll();
 		return ResponseEntity.ok().body(obj);
 
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Cliente> buscarPorId(@PathVariable Integer id) {
 		
-		Cliente obj = service.buscar(id);
+		Cliente obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 		
 	}

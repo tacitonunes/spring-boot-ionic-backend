@@ -23,17 +23,17 @@ public class PedidoResource {
 	private PedidoService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> listar() {
+	public ResponseEntity<?> listAll() {
 
-		List<Pedido> obj = service.listar();
+		List<Pedido> obj = service.listAll();
 		return ResponseEntity.ok().body(obj);
 
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Pedido> findById(@PathVariable Integer id) {
 		
-		Pedido obj = service.buscar(id);
+		Pedido obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 		
 	}

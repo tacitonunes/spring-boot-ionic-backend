@@ -16,12 +16,12 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
-	public List<Categoria> listar() {
+	public List<Categoria> listAll() {
 		//List<Categoria> categorias = repo.findAll();
 		return repo.findAll();
 	}
 
-	public Categoria buscar(Integer id) {
+	public Categoria findById(Integer id) {
 		/*
 		 * Categoria obj = repo.getById(id);
 		 * return obj;
@@ -34,6 +34,11 @@ public class CategoriaService {
 	
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	public Categoria update(Categoria obj) {
+		findById(obj.getId());
 		return repo.save(obj);
 	}
 	
