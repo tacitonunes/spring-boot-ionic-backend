@@ -2,6 +2,7 @@ package com.cursomc.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*import java.util.ArrayList;
 import java.util.List;*/
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.cursomc.domain.Categoria;
+import com.cursomc.dto.CategoriaDTO;
 import com.cursomc.services.CategoriaService;
 
 @RestController
@@ -26,10 +28,11 @@ public class CategoriaResource {
 	private CategoriaService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> listAll() {
+	public ResponseEntity<List<CategoriaDTO>> listAll() {
 
-		List<Categoria> obj = service.listAll();
-		return ResponseEntity.ok().body(obj);
+		List<Categoria> list = service.listAll();
+		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 
 	}
 	
@@ -57,7 +60,6 @@ public class CategoriaResource {
 	}
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
-		
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 		
