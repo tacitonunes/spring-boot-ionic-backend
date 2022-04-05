@@ -40,15 +40,15 @@ public class ClienteService {
 		return repo.save(obj);
 	}
 	
-	public Cliente update(Cliente obj) {
-		Cliente newObj = findById(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
+	public Cliente update(Cliente upCli) {
+		Cliente dbCli = findById(upCli.getId());
+		updateData(dbCli, upCli);
+		return repo.save(dbCli);
 	}
 	
-	private void updateData(Cliente newObj, Cliente obj) {
-		newObj.setEmail(obj.getEmail());
-		newObj.setNome(obj.getNome());
+	private void updateData(Cliente dbCli, Cliente upCli) {
+		dbCli.setEmail(upCli.getEmail());
+		dbCli.setNome(upCli.getNome());
 	}
 	
 	public void delete(Integer id) {
