@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Profile;
 import com.cursomc.services.DBService;
 
 @Configuration
-@Profile("hostoo")
-public class HostooConfig {
+@Profile("heroku")
+public class HerokuConfig {
 
 	@Autowired
 	private DBService dbService;
