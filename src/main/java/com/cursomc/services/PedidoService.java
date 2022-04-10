@@ -34,6 +34,9 @@ public class PedidoService {
 	
 	@Autowired
 	private ItemPedidoRepository ipRepo;
+
+	@Autowired
+	private ClienteService clienteServ;
 	
 	public List<Pedido> listAll() {
 		//List<Pedido> categorias = repo.findAll();
@@ -51,6 +54,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
+		obj.setCliente(clienteServ.findById(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		
@@ -65,12 +69,13 @@ public class PedidoService {
 		
 		for(ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
-			ip.setPreco(prodServ.findById(ip.getProduto().getId()).getPreco());
+			ip.setProduto(prodServ.findById(ip.getProduto().getId()));
+			ip.setPreco(ip.getProduto().getPreco());
 			ip.setPedido(obj);			
 		}
 		
 		ipRepo.saveAll(obj.getItens());
-		
+		System.out.println(obj); // Colocando o obj dentro do sysout, automaticamente será chamado o obj.toString()
 		return obj;	
 		
 	}
