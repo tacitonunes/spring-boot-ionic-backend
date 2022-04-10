@@ -38,6 +38,9 @@ public class PedidoService {
 	@Autowired
 	private ClienteService clienteServ;
 	
+	@Autowired
+	private EmailService emailServ;
+	
 	public List<Pedido> listAll() {
 		//List<Pedido> categorias = repo.findAll();
 		return repo.findAll();
@@ -75,7 +78,10 @@ public class PedidoService {
 		}
 		
 		ipRepo.saveAll(obj.getItens());
-		System.out.println(obj); // Colocando o obj dentro do sysout, automaticamente será chamado o obj.toString()
+		//System.out.println(obj); // Colocando o obj dentro do sysout, automaticamente será chamado o obj.toString()
+		
+		emailServ.sendOrderConfirmationEmail(obj);
+		
 		return obj;	
 		
 	}
