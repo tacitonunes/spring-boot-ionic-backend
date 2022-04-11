@@ -7,19 +7,11 @@ import org.springframework.mail.SimpleMailMessage;
 
 import com.cursomc.domain.Pedido;
 
-public abstract class AbstractEmailService implements EmailService {
+public abstract class AbstractEmailService {
 
 	@Value("${default.sender}")
 	private String sender;
 
-	@Override
-	public void sendOrderConfirmationEmail(Pedido ped) {
-		
-		SimpleMailMessage sm = prepararMensagemSimplesDoPedido(ped);
-		sendEmail(sm);
-		
-	}
-	
 	protected SimpleMailMessage prepararMensagemSimplesDoPedido(Pedido ped) {
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setTo(ped.getCliente().getEmail());

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailAuthenticationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import com.cursomc.domain.enums.EstadoPagamento;
 import com.cursomc.respositories.ItemPedidoRepository;
 import com.cursomc.respositories.PagamentoRepository;
 import com.cursomc.respositories.PedidoRepository;
+import com.cursomc.services.exceptions.MailAuthException;
 import com.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -39,7 +41,7 @@ public class PedidoService {
 	private ClienteService clienteServ;
 	
 	@Autowired
-	private EmailService emailServ;
+	private EmailService emailService;
 	
 	public List<Pedido> listAll() {
 		//List<Pedido> categorias = repo.findAll();
@@ -79,8 +81,11 @@ public class PedidoService {
 		
 		ipRepo.saveAll(obj.getItens());
 		//System.out.println(obj); // Colocando o obj dentro do sysout, automaticamente será chamado o obj.toString()
-		
-		emailServ.sendOrderConfirmationEmail(obj);
+		try {
+			emailService.sendOrderConfirmationEmail(obj);
+		} catch (MailAuthenticationException err) {
+			throw new MailAuthException("E-mail não encaminhado por problemas de autenticação com o servidor.");
+		}
 		
 		return obj;	
 		

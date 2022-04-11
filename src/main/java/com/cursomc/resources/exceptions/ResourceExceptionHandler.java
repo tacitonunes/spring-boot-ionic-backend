@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.cursomc.services.exceptions.ErroPadrao;
 import com.cursomc.services.exceptions.ErroValidacao;
 import com.cursomc.services.exceptions.IntegridadeDadosException;
+import com.cursomc.services.exceptions.MailAuthException;
 import com.cursomc.services.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
@@ -36,6 +37,15 @@ public class ResourceExceptionHandler {
 		
 	}
 	
+	@ExceptionHandler(MailAuthException.class)
+	public ResponseEntity<ErroPadrao> autenticacaoEmail (MailAuthException e, HttpServletRequest req){
+		
+		ErroPadrao err = new ErroPadrao(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+		
+	}
+	
 	//org.springframework.web.bind.MethodArgumentNotValidException
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErroValidacao> validacao (MethodArgumentNotValidException e, HttpServletRequest req){
@@ -48,7 +58,6 @@ public class ResourceExceptionHandler {
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 		
-	}
-	
+	}	
 	
 }

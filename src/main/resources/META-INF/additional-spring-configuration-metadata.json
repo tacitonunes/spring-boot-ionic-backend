@@ -8,5 +8,15 @@
     "name": "default.recipient",
     "type": "java.lang.String",
     "description": "A description for 'default.recipient'"
+  },
+  {
+    "name": "default.recipient",
+    "type": "java.lang.String",
+    "description": "A description for 'default.recipient'"
+  },
+  {
+    "name": "default.sender",
+    "type": "java.lang.String",
+    "description": "A description for 'default.sender'"
   }
 ]}
