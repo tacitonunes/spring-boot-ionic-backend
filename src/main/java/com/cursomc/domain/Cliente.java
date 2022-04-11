@@ -29,9 +29,12 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	
+
 	@Column(unique=true)
 	private String email;
+	
+	@JsonIgnore
+	private String senha;
 	private String ni;
 	private Integer tipo;
 	
@@ -55,9 +58,10 @@ public class Cliente implements Serializable{
 	
 	public Cliente() {}
 
-	public Cliente(Integer id, String nome, String email, String ni, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String ni, TipoCliente tipo, String senha) {
 		super();
 		this.id = id;
+		this.senha = senha;
 		this.nome = nome;
 		this.email = email;
 		this.ni = ni;
@@ -86,6 +90,14 @@ public class Cliente implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getNi() {
