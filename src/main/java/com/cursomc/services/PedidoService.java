@@ -82,7 +82,7 @@ public class PedidoService {
 		ipRepo.saveAll(obj.getItens());
 		//System.out.println(obj); // Colocando o obj dentro do sysout, automaticamente será chamado o obj.toString()
 		try {
-			emailService.sendOrderConfirmationEmail(obj);
+			emailService.sendOrderConfirmationHtmlEmail(obj);
 		} catch (MailAuthenticationException err) {
 			throw new MailAuthException("E-mail não encaminhado por problemas de autenticação com o servidor.");
 		}
